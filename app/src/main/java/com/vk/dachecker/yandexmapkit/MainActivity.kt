@@ -1,8 +1,10 @@
 package com.vk.dachecker.yandexmapkit
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.vk.dachecker.yandexmapkit.databinding.ActivityMainBinding
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKit
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         var mapKit: MapKit = MapKitFactory.getInstance()
         var probki = mapKit.createTrafficLayer(mapView.mapWindow)
         var probkiIsOn = false
+        requestLocationPermission()
         trafficButton.setOnClickListener {
             when (probkiIsOn) {
                 false -> {
@@ -57,5 +60,25 @@ class MainActivity : AppCompatActivity() {
         mapView.onStart()
         MapKitFactory.getInstance().onStart()
         super.onStart()
+    }
+
+    private fun requestLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                ), 0
+            )
+            return
+        }
     }
 }
