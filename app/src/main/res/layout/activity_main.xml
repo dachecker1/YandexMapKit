@@ -6,9 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mapView">
+
+        <Button
+            android:id="@+id/trafficButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="-100dp"
+            android:layout_marginTop="-100dp"
+            android:layout_marginEnd="-100dp"
+            android:layout_marginBottom="-100dp" />
+    </androidx.cardview.widget.CardView>
+
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
